@@ -34,6 +34,8 @@ public void loginValidEmailPassowrd() throws InterruptedException {
     //precondition
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+    //opening URL
      String url= "https://qa.koel.app/";
      driver.get(url);
 
@@ -52,6 +54,7 @@ public void loginValidEmailPassowrd() throws InterruptedException {
      WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
      Assert.assertTrue(avatarIcon.isDisplayed());//test pass only if the input is true
 
+    //post condition
     driver.quit();
 }
 
@@ -62,6 +65,7 @@ public void incorrectEmailCorrectPassowrd() throws InterruptedException {
     //precondition
     WebDriver driver = new ChromeDriver(options);
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    //opening URL
     String url= "https://qa.koel.app/";
     driver.get(url);
 
@@ -79,6 +83,7 @@ public void incorrectEmailCorrectPassowrd() throws InterruptedException {
     //Expected Result
     Assert.assertEquals(driver.getCurrentUrl(),url);
 
+    //post condition
     driver.quit();
 
 
