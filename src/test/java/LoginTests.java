@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class LoginTests extends BaseTest {
-    @Test
+
     public void loginEmptyEmailPassword() {
 
 //      Added ChromeOptions argument below to fix websocket error
@@ -29,64 +29,39 @@ public class LoginTests extends BaseTest {
 @Test
 public void loginValidEmailPassowrd() throws InterruptedException {
 
-    ChromeOptions options = new ChromeOptions();
-    options.addArguments("--remote-allow-origins=*");
-    //precondition
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-    //opening URL
-     String url= "https://qa.koel.app/";
-     driver.get(url);
-
-     //test steps
-     WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-     emailField.clear();
-     emailField.sendKeys("vijendar@testpro.io");
-     WebElement passowrdField = driver.findElement(By.cssSelector("input[type='password']"));
-     passowrdField.clear();
-     passowrdField.sendKeys("cnb243YB");
-     WebElement submitBtn = driver.findElement(By.cssSelector("button[type='submit']"));
-     submitBtn.click();
-     Thread.sleep(2000);
-
+    provideEmail("vijendar@testpro.io");
+    providePassword("cnb243YB");
+    clickSubmitBtn();
+    Thread.sleep(2000);
      //Expected Result
      WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
      Assert.assertTrue(avatarIcon.isDisplayed());//test pass only if the input is true
-
-    //post condition
-    driver.quit();
 }
 
-@Test
+    @Test
 public void incorrectEmailCorrectPassowrd() throws InterruptedException {
-    ChromeOptions options = new ChromeOptions();
-    options.addArguments("--remote-allow-origins=*");
-    //precondition
-    WebDriver driver = new ChromeDriver(options);
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     //opening URL
-    String url= "https://qa.koel.app/";
-    driver.get(url);
-
-    //test Steps
-    WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-    emailField.clear();
-    emailField.sendKeys("vijendar@testpro.io");
-    WebElement passowrdField = driver.findElement(By.cssSelector("input[type='password']"));
-    passowrdField.clear();
-    passowrdField.sendKeys("");
-    WebElement submitBtn = driver.findElement(By.cssSelector("button[type='submit']"));
-    submitBtn.click();
-    Thread.sleep(2000);
+        provideEmail("incorrect@testpro.io");
+        providePassword("cnb243YB");
+        clickSubmitBtn();
+        Thread.sleep(2000);
 
     //Expected Result
     Assert.assertEquals(driver.getCurrentUrl(),url);
-
-    //post condition
-    driver.quit();
-
-
 }
+
+    @Test
+    public void ValidEmailinCorrectPassowrd() throws InterruptedException {
+        //opening URL
+        provideEmail("vijendar@testpro.io");
+        providePassword("saoighsd");
+        clickSubmitBtn();
+        Thread.sleep(2000);
+
+        //Expected Result
+        Assert.assertEquals(driver.getCurrentUrl(),url);
+    }
+
+
 }
 
