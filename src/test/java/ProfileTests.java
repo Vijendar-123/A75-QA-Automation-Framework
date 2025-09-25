@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class ProfileTests extends BaseTest{
 
-@Test
+    @Test
 public void chnageProfileName() throws InterruptedException {
     //login
     provideEmail("vijendar@testpro.io");
