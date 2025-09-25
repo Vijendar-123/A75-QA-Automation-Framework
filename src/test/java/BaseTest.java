@@ -82,4 +82,35 @@ public class BaseTest {
         clickSave.click();
     }
 
+    public String getAddToPlaylistSuccessMsg() {
+        WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
+      return  notification.getText();
+
+    }
+
+    public void choosePlaylist() {
+        WebElement playlist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(),'Test Pro Playlist')]"));
+        playlist.click();
+    }
+
+    public void clickAddToBtn() {
+        WebElement addToBtn = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//button[@class='btn-add-to']"));
+                addToBtn.click();
+    }
+
+    public void selectFirstSong() {
+        WebElement Firstsong = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//tr[@class='song-item'][1]"));
+        Firstsong.click();
+    }
+
+    public void clickViewALLBtn() {
+        WebElement viewAll = driver.findElement(By.xpath("//button[@data-test='view-all-songs-btn']"));
+        viewAll.click();
+    }
+
+    public void searchSong(String song) {
+        WebElement searchField = driver.findElement(By.cssSelector("input[type='search']"));
+        searchField.clear();
+        searchField.sendKeys(song);
+    }
 }
