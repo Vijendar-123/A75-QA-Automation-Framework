@@ -26,7 +26,7 @@ public class Homework17 extends BaseTest{
         Thread.sleep(2000);
         //Select the playlist
         choosePlaylist();
-        Thread.sleep(2000);
+        
         //Assertion for added to the playlist
         Assert.assertEquals(getAddToPlaylistSuccessMsg(),ExpectedString);
     }
