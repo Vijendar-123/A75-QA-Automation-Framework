@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -26,7 +27,7 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
     }
-@Test
+
 public void loginValidEmailPassowrd() throws InterruptedException {
 
     provideEmail("vijendar@testpro.io");
@@ -38,7 +39,7 @@ public void loginValidEmailPassowrd() throws InterruptedException {
      Assert.assertTrue(avatarIcon.isDisplayed());//test pass only if the input is true
 }
 
-    @Test
+
 public void incorrectEmailCorrectPassowrd() throws InterruptedException {
     //opening URL
         provideEmail("incorrect@testpro.io");
@@ -50,11 +51,23 @@ public void incorrectEmailCorrectPassowrd() throws InterruptedException {
     Assert.assertEquals(driver.getCurrentUrl(),url);
 }
 
-    @Test
+
     public void ValidEmailinCorrectPassowrd() throws InterruptedException {
         //opening URL
         provideEmail("vijendar@testpro.io");
         providePassword("saoighsd");
+        clickSubmitBtn();
+        Thread.sleep(2000);
+
+        //Expected Result
+        Assert.assertEquals(driver.getCurrentUrl(),url);
+    }
+
+@Test(dataProvider = "IncorrectLoginData", dataProviderClass = DataProvid.class)
+public void incorrectDataTest(String email , String password) throws InterruptedException{
+
+        provideEmail(email);
+        providePassword(password);
         clickSubmitBtn();
         Thread.sleep(2000);
 
